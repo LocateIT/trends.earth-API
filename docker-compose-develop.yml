@@ -7,7 +7,7 @@ services:
         service: base
       container_name: gef-api-develop
       ports:
-        - "3000:3000"
+        - 3000
       env_file:
         - develop.env
       command: develop
@@ -50,7 +50,7 @@ services:
       volumes:
           - postgres-data:/var/lib/postgresql/data
       ports:
-        - 5432:5432
+        - 5432
       restart: always
 
     registry:
@@ -59,7 +59,7 @@ services:
       env_file:
         - develop.env
       ports:
-        - 5000:5000
+        - 5000
       restart: always          
       # volumes:
       #   - /var/lib/registry:/var/lib/registry
