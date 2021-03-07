@@ -3,6 +3,24 @@ initialize gef database on cmd
 -docker exec -it gef-api-database psql -U postgres gef
 ----------------------------------------------------
 
+backup postgres database
+------------------------------------------------------
+docker exec -t gef-api-database pg_dumpall -c -U postgres | gzip > ./tmp/dump_$(date +"%Y-%m-%d_%H_%M_%S").gz
+------------------------------------------------------
+
+restore database backups
+-------------------------------------------------------
+gunzip < your_dump.sql.gz | docker exec -i gef-api-database psql -U postgres -d gef
+--------------------------------------------------------
+
+connect to aws ec2 instance
+--------------------------------------------------------
+ssh -i "ldms-oss.pem" ubuntu@ec2-18-221-179-255.us-east-2.compute.amazonaws.com
+
+copy file from remote server to local
+-------------------------------------------------------
+scp -i ldms-oss.pem ubuntu@ec2-18-221-179-255.us-east-2.compute.amazonaws.com:/tmp/dump_2021-03-07_12_22_59.gz C:\Users\USER\Documents\Projects\LDMP
+------------------------------------------------------
 
 update a postgres table
 --------------------------
