@@ -3,6 +3,10 @@ initialize gef database on cmd
 -docker exec -it gef-api-database psql -U postgres gef
 ----------------------------------------------------
 
+backup postgres table
+------------------------------------------------------
+sudo docker exec -it mukau-db pg_dump -U cms -t webheaders mukaudb > '/home/grace/Projects/cms_tables_c/create_webheaders.sql'
+
 backup postgres database
 ------------------------------------------------------
 docker exec -t gef-api-database pg_dumpall -c -U postgres | gzip > ./tmp/dump_$(date +"%Y-%m-%d_%H_%M_%S").gz
